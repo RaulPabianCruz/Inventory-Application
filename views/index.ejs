@@ -5,14 +5,14 @@
     <body>
         <h1><%= title %></h1>
         <ul>
-            <% categories.forEach(category => { %>
+            <% themes.forEach(theme => { %>
                 <li>
-                    <a href="/<%=category.id%>/products">
+                    <a href="/<%=theme.id%>/products">
                         <div>
-                            <h2> <%= category.name %></h2> 
+                            <h2> <%= theme.name %></h2> 
                         </div> 
                     </a>
-                    <a href="/<%=category.id%>/update">
+                    <a href="/<%=theme.id%>/update">
                         <div>
                             Edit
                         </div>
@@ -20,9 +20,9 @@
                 </li>
             <% }) %>
         </ul>
-        <a href="/addCategory">
+        <a href="/addTheme">
             <div>
-                <h3>Add a Category</h3>
+                <h3>Add a Theme</h3>
             </div>
         </a>
     </body>
