@@ -8,7 +8,7 @@ router.get('/:themeId/update', themeCtrl.getEditThemeForm);
 router.get('/:themeId/products', themeCtrl.getThemeProducts);
 router.post('/addTheme', themeCtrl.postNewTheme);
 router.post('/:themeId/update', themeCtrl.postEditTheme);
-//router.post('/:themeId/delete', );
+router.post('/:themeId/delete', themeCtrl.postDeleteTheme);
 
 module.exports = router;
 

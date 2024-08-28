@@ -67,4 +67,16 @@ const postEditTheme = [
     })
 ];
 
-module.exports = { getAllThemes, getNewThemeForm, getEditThemeForm, getThemeProducts, postNewTheme, postEditTheme };
+const postDeleteTheme = asyncHandler(async (req, res) => {
+    await themeDb.deleteTheme(req.params.themeId);
+    res.redirect('/');
+});
+
+module.exports = { getAllThemes,
+    getNewThemeForm,
+    getEditThemeForm,
+    getThemeProducts,
+    postNewTheme,
+    postEditTheme,
+    postDeleteTheme 
+};

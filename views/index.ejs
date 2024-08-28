@@ -17,6 +17,9 @@
                             Edit
                         </div>
                     </a>
+                    <form action="/<%=theme.id%>/delete" method="post">
+                        <button type="submit" onClick="return confirm('Are you sure you want to delete this Theme?');">Delete</button>
+                    </form>
                 </li>
             <% }) %>
         </ul>

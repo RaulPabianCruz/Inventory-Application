@@ -18,4 +18,8 @@ async function getThemeFromId(themeId) {
     return rows;
 }
 
-module.exports = { getAllThemes, insertTheme, updateTheme, getThemeFromId };
+async function deleteTheme(themeId) {
+    await pool.query('DELETE FROM themes WHERE id = $1', [themeId]);
+}
+
+module.exports = { getAllThemes, insertTheme, updateTheme, getThemeFromId, deleteTheme };
