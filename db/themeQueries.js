@@ -13,4 +13,9 @@ async function updateTheme(theme, themeId) {
     await pool.query('UPDATE themes SET name = $1 WHERE id = $2', [theme, themeId]);
 }
 
-module.exports = { getAllThemes, insertTheme, updateTheme };
+async function getThemeFromId(themeId) {
+    const { rows } = await pool.query('SELECT name FROM themes WHERE id = $1', [themeId]);
+    return rows;
+}
+
+module.exports = { getAllThemes, insertTheme, updateTheme, getThemeFromId };

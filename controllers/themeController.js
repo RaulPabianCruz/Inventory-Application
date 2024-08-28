@@ -25,6 +25,14 @@ const getEditThemeForm = (req, res) => {
     });
 }
 
+const getThemeProducts = asyncHandler( async (req, res) => {
+    const name = await themeDb.getThemeFromId(req.params.themeId);
+    res.render('themeProducts', {
+        title: name[0].name,
+        themeId: req.params.themeId
+    });
+});
+
 const postNewTheme = [
     validateUser,
     asyncHandler(async (req, res) => {
@@ -59,4 +67,4 @@ const postEditTheme = [
     })
 ];
 
-module.exports = { getAllThemes, getNewThemeForm, getEditThemeForm, postNewTheme, postEditTheme };
+module.exports = { getAllThemes, getNewThemeForm, getEditThemeForm, getThemeProducts, postNewTheme, postEditTheme };
