@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title><%=title%></title>
+    </head>
+    <body>
+        <h1><%=title%></h1>
+        <ul>
+            <% minifigs.forEach(minifig => { %>
+                <li>
+                    <a href="/<%=minifig.id%>">
+                        <div>
+                            <h3><%=minifig.name%></h3>
+                        </div>
+                    </a>
+                </li>
+            <% }); %>
+        </ul>
+        <a href="/<%=themeId%>/products">Back</a>
+    </body>
+</html>

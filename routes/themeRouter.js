@@ -1,6 +1,10 @@
 const { Router } = require('express');
 const router = Router();
 const themeCtrl = require('../controllers/themeController.js');
+const minifigRouter = require('./minifigRouter.js');
+
+router.use('/:themeId/minifigs', minifigRouter);
+//router.get('/:themeId/sets', );
 
 router.get('/', themeCtrl.getAllThemes);
 router.get('/addTheme', themeCtrl.getNewThemeForm);
