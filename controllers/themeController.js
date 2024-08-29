@@ -1,5 +1,6 @@
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
+const db = require('../db/queries.js');
 const themeDb = require('../db/themeQueries.js');
 
 const validateTheme = body('theme').trim()
@@ -26,7 +27,7 @@ const getEditThemeForm = (req, res) => {
 }
 
 const getThemeProducts = asyncHandler( async (req, res) => {
-    const name = await themeDb.getThemeFromId(req.params.themeId);
+    const name = await db.getThemeFromId(req.params.themeId);
     res.render('theme/themeProducts', {
         title: name[0].name,
         themeId: req.params.themeId
