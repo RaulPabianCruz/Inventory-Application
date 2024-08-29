@@ -17,4 +17,33 @@ const getThemeMinifigs = asyncHandler(async (req, res) => {
     });
 });
 
-module.exports = { getThemeMinifigs };
+const getNewMinifigForm = asyncHandler(async (req, res) => {
+    const themes = await db.getAllThemes();
+    res.render('minifigs/newMinifigForm', {
+        title: 'New Minifig',
+        themes: themes,
+        themeId: req.params.themeId
+    });
+});
+
+const postNewMinifig = [
+    validateMinifig,
+    asyncHandler(async (req, res) => {
+        const name = req.body.name;
+        const themeId = req.body.themeId;
+        const errors = validationResult(req);
+        if(!errors.isEmpty) {
+            const themes = await db.getAllThemes();
+            return res.status(400).render('minifigs/newMinifigForm', {
+                title: 'New Minifig',
+                themes: themes,
+                themeId: themeId,
+                errors: errors.array()
+            });
+        }
+        await minifigDb.insertMinifig(name, themeId);
+        res.redirect(`/${themeId}/minifigs`);
+    })
+]
+
+module.exports = { getThemeMinifigs, getNewMinifigForm, postNewMinifig };

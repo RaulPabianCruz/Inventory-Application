@@ -5,4 +5,8 @@ async function getThemeMinifigs(themeId) {
     return rows;
 }
 
-module.exports = { getThemeMinifigs };
+async function insertMinifig(name, themeId) {
+    await pool.query('INSERT INTO minifigs (name, themeId) VALUES ($1, $2);', [name, themeId]);
+}
+
+module.exports = { getThemeMinifigs, insertMinifig };

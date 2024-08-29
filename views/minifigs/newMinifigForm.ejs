@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title><%=title%></title>
+    </head>
+    <body>
+        <h1><%=title%></h1>
+        <form action="/<%=themeId%>/minifigs/add" method="post">
+            <label for="name">Minifig Name:</label>
+            <input type="text" name="name" id="name" minlength="1" maxlength="25" required>
+            <label for="theme">Minfig Theme:</label>
+            <select name="themeId" id="theme" required>
+                <% themes.forEach(theme => { %>
+                    <% if(theme.id == themeId) { %>
+                        <option value="<%=theme.id%>" selected><%=theme.name%></option>
+                    <% } else { %>
+                        <option value="<%=theme.id%>"><%=theme.name%></option>
+                    <% } %>
+                <% }); %>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+        <a href="/<%=themeId%>/products">Back</a>
+    </body>
+</html>
