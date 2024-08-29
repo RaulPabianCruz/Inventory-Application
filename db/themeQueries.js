@@ -1,10 +1,5 @@
 const pool = require('./pool');
 
-async function getAllThemes() {
-    const { rows } = await pool.query('SELECT * FROM themes');
-    return rows;
-};
-
 async function insertTheme(theme) {
     await pool.query('INSERT INTO themes (name) VALUES ($1)', [theme]);
 }
@@ -17,4 +12,4 @@ async function deleteTheme(themeId) {
     await pool.query('DELETE FROM themes WHERE id = $1', [themeId]);
 }
 
-module.exports = { getAllThemes, insertTheme, updateTheme, deleteTheme };
+module.exports = { insertTheme, updateTheme, deleteTheme };

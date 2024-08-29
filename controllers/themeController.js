@@ -8,7 +8,7 @@ const validateTheme = body('theme').trim()
                     .isLength({min: 1, max:25}).withMessage('Name must be between 1 and 25 characters.');
 
 const getAllThemes = asyncHandler( async (req, res) => {
-    const themes = await themeDb.getAllThemes();
+    const themes = await db.getAllThemes();
     res.render('index', {
         title: 'Themes',
         themes: themes,
