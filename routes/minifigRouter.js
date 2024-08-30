@@ -4,7 +4,7 @@ const minifigCtrl = require('../controllers/minifigController.js');
 
 router.get('/', minifigCtrl.getThemeMinifigs);
 router.get('/add', minifigCtrl.getNewMinifigForm);
-//router.get('/:minifigId', );
+router.get('/:minifigId', minifigCtrl.getMinifigDetails);
 //router.get('/:minifigId/update', );
 router.post('/add', minifigCtrl.postNewMinifig);
 //router.post('/:minifigId/update', );

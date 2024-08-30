@@ -27,9 +27,9 @@ const getEditThemeForm = (req, res) => {
 }
 
 const getThemeProducts = asyncHandler( async (req, res) => {
-    const name = await db.getThemeFromId(req.params.themeId);
+    const theme = await db.getThemeFromId(req.params.themeId);
     res.render('theme/themeProducts', {
-        title: name[0].name,
+        title: theme[0].name,
         themeId: req.params.themeId
     });
 });

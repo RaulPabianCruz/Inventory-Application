@@ -6,8 +6,13 @@ async function getAllThemes() {
 };
 
 async function getThemeFromId(themeId) {
-    const { rows } = await pool.query('SELECT name FROM themes WHERE id = $1', [themeId]);
+    const { rows } = await pool.query('SELECT * FROM themes WHERE id = $1', [themeId]);
     return rows;
 }
 
-module.exports = { getAllThemes, getThemeFromId };
+async function getMinfigById(minifigId) {
+    const { rows } = await pool.query('SELECT * FROM minifigs WHERE id = $1', [minifigId]);
+    return rows;
+}
+
+module.exports = { getAllThemes, getThemeFromId, getMinfigById };

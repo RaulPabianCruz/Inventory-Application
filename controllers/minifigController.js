@@ -26,6 +26,16 @@ const getNewMinifigForm = asyncHandler(async (req, res) => {
     });
 });
 
+const getMinifigDetails = asyncHandler(async (req, res) => {
+    const minifigDetails = await db.getMinfigById(req.params.minifigId);
+    const theme = await db.getThemeFromId(minifigDetails[0].themeid);
+    res.render('minifigs/minifigDetails', {
+        title: 'Minifig Details',
+        minifig: minifigDetails[0],
+        theme: theme[0]
+    });
+});
+
 const postNewMinifig = [
     validateMinifig,
     asyncHandler(async (req, res) => {
@@ -46,4 +56,4 @@ const postNewMinifig = [
     })
 ]
 
-module.exports = { getThemeMinifigs, getNewMinifigForm, postNewMinifig };
+module.exports = { getThemeMinifigs, getNewMinifigForm, getMinifigDetails, postNewMinifig };
