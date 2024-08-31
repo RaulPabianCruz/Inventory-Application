@@ -36,13 +36,23 @@ const getMinifigDetails = asyncHandler(async (req, res) => {
     });
 });
 
+const getEditMinifigForm = asyncHandler(async (req, res) => {
+    const minifigDetails = await db.getMinfigById(req.params.minifigId);
+    const themes = await db.getAllThemes();
+    res.render('minifigs/editMinifigForm', {
+        title: 'Edit Minifig',
+        minifig: minifigDetails[0],
+        themes: themes
+    });
+});
+
 const postNewMinifig = [
     validateMinifig,
     asyncHandler(async (req, res) => {
         const name = req.body.name;
         const themeId = req.body.themeId;
         const errors = validationResult(req);
-        if(!errors.isEmpty) {
+        if(!errors.isEmpty()) {
             const themes = await db.getAllThemes();
             return res.status(400).render('minifigs/newMinifigForm', {
                 title: 'New Minifig',
@@ -54,6 +64,34 @@ const postNewMinifig = [
         await minifigDb.insertMinifig(name, themeId);
         res.redirect(`/${themeId}/minifigs`);
     })
-]
+];
 
-module.exports = { getThemeMinifigs, getNewMinifigForm, getMinifigDetails, postNewMinifig };
+const postEditMinifig = [
+    validateMinifig,
+    asyncHandler(async (req, res) => {
+        const name = req.body.name;
+        const themeId = req.body.themeId;
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            const minifigDetails = await db.getMinfigById(req.params.minifigId);
+            const themes = await db.getAllThemes();
+            return res.status(400).render('minifigs/editMinifigForm', {
+                title: 'Edit Minifig',
+                minifig: minifigDetails[0],
+                themes: themes,
+                errors: errors.array()
+            });
+        }
+        await minifigDb.updateMinifig(name, themeId, req.params.minifigId);
+        res.redirect(`/${req.params.themeId}/minifigs`);
+    })
+];
+
+module.exports = { 
+    getThemeMinifigs,
+    getNewMinifigForm,
+    getMinifigDetails,
+    getEditMinifigForm,
+    postNewMinifig,
+    postEditMinifig
+};
