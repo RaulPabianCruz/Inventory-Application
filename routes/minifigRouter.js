@@ -8,7 +8,7 @@ router.get('/:minifigId', minifigCtrl.getMinifigDetails);
 router.get('/:minifigId/update', minifigCtrl.getEditMinifigForm);
 router.post('/add', minifigCtrl.postNewMinifig);
 router.post('/:minifigId/update', minifigCtrl.postEditMinifig);
-//router.post('/:minifigId/delete', );
+router.post('/:minifigId/delete', minifigCtrl.postDeleteMinifig);
 
 module.exports = router;
 

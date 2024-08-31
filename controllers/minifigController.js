@@ -8,7 +8,7 @@ const validateMinifig = body('name').trim()
                         .isLength({min: 1, max: 25}).withMessage('Name must be between 1 and 25 characters');
 
 const getThemeMinifigs = asyncHandler(async (req, res) => {
-    const minifigs = await minifigDb.getThemeMinifigs(req.params.themeId);
+    const minifigs = await db.getMinifigsByTheme(req.params.themeId);
     const theme = await db.getThemeFromId(req.params.themeId);
     res.render('minifigs/minifigSelection', {
         title: theme[0].name + ' Minifigs',
@@ -27,7 +27,7 @@ const getNewMinifigForm = asyncHandler(async (req, res) => {
 });
 
 const getMinifigDetails = asyncHandler(async (req, res) => {
-    const minifigDetails = await db.getMinfigById(req.params.minifigId);
+    const minifigDetails = await db.getMinifigById(req.params.minifigId);
     const theme = await db.getThemeFromId(minifigDetails[0].themeid);
     res.render('minifigs/minifigDetails', {
         title: 'Minifig Details',
@@ -37,7 +37,7 @@ const getMinifigDetails = asyncHandler(async (req, res) => {
 });
 
 const getEditMinifigForm = asyncHandler(async (req, res) => {
-    const minifigDetails = await db.getMinfigById(req.params.minifigId);
+    const minifigDetails = await db.getMinifigById(req.params.minifigId);
     const themes = await db.getAllThemes();
     res.render('minifigs/editMinifigForm', {
         title: 'Edit Minifig',
@@ -73,7 +73,7 @@ const postEditMinifig = [
         const themeId = req.body.themeId;
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
-            const minifigDetails = await db.getMinfigById(req.params.minifigId);
+            const minifigDetails = await db.getMinifigById(req.params.minifigId);
             const themes = await db.getAllThemes();
             return res.status(400).render('minifigs/editMinifigForm', {
                 title: 'Edit Minifig',
@@ -87,11 +87,18 @@ const postEditMinifig = [
     })
 ];
 
+const postDeleteMinifig = asyncHandler(async (req, res) => {
+    const themeId = req.params.themeId;
+    await minifigDb.deleteMinifig(req.params.minifigId);
+    res.redirect(`/${themeId}/minifigs`); 
+});
+
 module.exports = { 
     getThemeMinifigs,
     getNewMinifigForm,
     getMinifigDetails,
     getEditMinifigForm,
     postNewMinifig,
-    postEditMinifig
+    postEditMinifig,
+    postDeleteMinifig
 };

@@ -10,9 +10,14 @@ async function getThemeFromId(themeId) {
     return rows;
 }
 
-async function getMinfigById(minifigId) {
+async function getMinifigsByTheme(themeId) {
+    const { rows } = await pool.query('SELECT * FROM minifigs WHERE themeId = $1', [themeId]);
+    return rows;
+}
+
+async function getMinifigById(minifigId) {
     const { rows } = await pool.query('SELECT * FROM minifigs WHERE id = $1', [minifigId]);
     return rows;
 }
 
-module.exports = { getAllThemes, getThemeFromId, getMinfigById };
+module.exports = { getAllThemes, getThemeFromId, getMinifigsByTheme, getMinifigById };

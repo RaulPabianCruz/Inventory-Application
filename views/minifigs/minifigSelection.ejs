@@ -7,15 +7,18 @@
         <ul>
             <% minifigs.forEach(minifig => { %>
                 <li>
-                    <a href="/<%=themeId%>/minifigs/<%=minifig.id%>">
+                    <a href="minifigs/<%=minifig.id%>">
                         <div>
                             <h3><%=minifig.name%></h3>
                         </div>
                     </a>
+                    <form action="minifigs/<%=minifig.id%>/delete" method="post">
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this Minifigure?')">Delete</button>
+                    </form>
                 </li>
             <% }); %>
         </ul>
-        <a href="/<%=themeId%>/minifigs/add">
+        <a href="minifigs/add">
             <div>
                 <h2>Add Minifig</h2>
             </div>
