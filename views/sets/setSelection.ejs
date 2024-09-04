@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title><%=title%></title>
+    </head>
+    <body>
+        <h1><%=title%></h1>
+        <ul>
+            <% sets.forEach(set => { %>
+                <li>
+                    <a href="sets/<%=set.id%>">
+                        <%=set.name%>
+                    </a>
+                </li>
+            <% }) %>
+        </ul>
+        <a href="/<%=themeId%>/products">Back</a>
+    </body>
+</html>

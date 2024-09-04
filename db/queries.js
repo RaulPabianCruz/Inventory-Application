@@ -20,4 +20,15 @@ async function getMinifigById(minifigId) {
     return rows;
 }
 
-module.exports = { getAllThemes, getThemeFromId, getMinifigsByTheme, getMinifigById };
+async function getSetsByTheme(themeId) {
+    const { rows } = await pool.query('SELECT * FROM sets WHERE themeid = $1', [themeId]);
+    return rows;
+}
+
+module.exports = { 
+    getAllThemes,
+    getThemeFromId,
+    getMinifigsByTheme,
+    getMinifigById,
+    getSetsByTheme,
+};
