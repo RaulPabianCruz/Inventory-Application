@@ -20,4 +20,12 @@ const getThemeSets = asyncHandler(async (req, res) => {
 });
 
 
-module.exports = { getThemeSets };
+const getNewSetForm = asyncHandler(async (req, res) => {
+    const theme = await db.getThemeFromId(req.params.themeId);
+    res.render('sets/newSetForm', {
+        title: `New ${theme[0].name} Set`,
+        themeId: theme[0].id
+    });
+});
+
+module.exports = { getThemeSets, getNewSetForm };

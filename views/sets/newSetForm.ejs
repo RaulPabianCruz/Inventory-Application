@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title><%=title%></title>
+    </head>
+    <body>
+      <h1><%=title%></h1>
+      <form action="add" method="post">
+        <label for="name">Set Name:</label>
+        <input type="text" name="name" id="name" minlength="1" maxlength="40" required>
+        <label for="piececount">Piece Count:</label>
+        <input type="text" name="piececount" id="piececount" pattern="/^\d*$/" minlength="1" maxlength="5" required>
+        <label for="qty">Qty:</label>
+        <input type="number" name="qty" id="qty" min="0" max="10000" required>
+        <button type="submit">Add</button>
+      </form>
+      <a href="/<%=themeId%>/sets">Back</a>
+    </body>
+</html>
