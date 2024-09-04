@@ -8,7 +8,7 @@ router.get('/add', setCtrl.getNewSetForm);
 //router.get('/:setId', );
 //router.get('/:setId/updateMinifigs', );
 //router.get('/:setId/addMinifigs', );
-//router.post('/add', );
+router.post('/add', setCtrl.postNewSetForm);
 //router.post('/update', );
 //router.post('/:setId/updateMinifigs', );
 //router.post('/:setId/addMinifigs', );
