@@ -25,10 +25,16 @@ async function getSetsByTheme(themeId) {
     return rows;
 }
 
+async function getSetById(setId) {
+    const { rows } = await pool.query('SELECT * FROM sets WHERE id = $1', [setId]);
+    return rows;
+}
+
 module.exports = { 
     getAllThemes,
     getThemeFromId,
     getMinifigsByTheme,
     getMinifigById,
     getSetsByTheme,
+    getSetById,
 };
