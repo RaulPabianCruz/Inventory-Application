@@ -4,7 +4,7 @@
     </head>
     <body>
         <h1><%=title%></h1>
-        <form action="addMinifig" method="post">
+        <form action="addMinifigs" method="post">
             <label for="minifigId">Choose a minifig to add:</label>
             <select name="minifigId" id="minifigId" required>
                 <%minifigs.forEach(minifig => { %>
@@ -17,5 +17,6 @@
             <input type="number" min="1" max="10" name="qty" id="qty" required>
             <button type="submit">Add</button>
         </form>
+        <a href="/<%=set.themeid%>/sets/<%=set.id%>">Back</a>
     </body>
 </html>

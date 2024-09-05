@@ -19,7 +19,7 @@ const validateSet = [
 
 const validateMinifig = [
     body('minifigId').trim()
-    .isNumeric().withMessage('Invalid Minifig Selection - (id)'),
+    .isInt().withMessage('Invalid Minifig Selection - (id)'),
     body('qty').trim()
     .isInt({min: 1, max: 10}).withMessage('Minifig quantity must be between 1 and 10')
 ];
@@ -28,7 +28,7 @@ const getThemeSets = asyncHandler(async (req, res) => {
     const sets = await db.getSetsByTheme(req.params.themeId);
     const theme = await db.getThemeFromId(req.params.themeId);
     res.render('sets/setSelection', {
-        title: theme[0].name + ' Sets',
+        title: `${theme[0].name} Sets`,
         sets: sets,
         themeId: theme[0].id
     });
@@ -45,11 +45,11 @@ const getNewSetForm = asyncHandler(async (req, res) => {
 const getSetDetails = asyncHandler(async (req, res) => {
     const setId = req.params.setId;
     const set = await db.getSetById(setId);
-    //need to fill out set minifigs and check back on this query later
     const minifigs = await setMinifigDb.getSetMinifigs(setId);
     res.render('sets/setDetails', {
         title: 'Set Details',
-        set: set[0]
+        set: set[0],
+        minifigs: minifigs
     });
 });
 
@@ -58,7 +58,8 @@ const getNewSetMinifigForm = asyncHandler(async (req, res) => {
     const set = await db.getSetById(req.params.setId);
     res.render('sets/newSetMinifigForm', {
         title: `New ${set[0].setname} Minifig`,
-        minifigs: minifigs
+        minifigs: minifigs,
+        set: set[0]
     });
 });
 
@@ -73,12 +74,37 @@ const postNewSetForm = [
         if(!errors.isEmpty()) {
             return res.status(400).render('/sets/newSetForm', {
                 title: `New ${theme[0].name} Set`,
-                themeId: theme[0].id
+                themeId: theme[0].id,
+                errors: errors.array()
             });
         }
         await setDb.insertSet(name, pieceCount, qty, theme[0].id);
-        res.redirect(`/${theme[0].id}/sets`);
+        res.redirect(`/${req.params.themeId}/sets`);
     })
 ]
 
-module.exports = { getThemeSets, getNewSetForm, getSetDetails, getNewSetMinifigForm, postNewSetForm };
+const postNewSetMinifigForm = [
+    validateMinifig,
+    asyncHandler(async (req, res) => {
+        const setId = req.params.setId;
+        const minifigId = req.body.minifigId;
+        const qty = req.body.qty;
+
+        const minifigs = await setMinifigDb.getNewSetMinifigs(req.params.themeId, setId);
+        const set = await db.getSetById(setId);
+
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            return res.status(400).render('/sets/newSetMinifigForm', {
+                title: `New ${set[0].name} Minifig`,
+                minifigs: minifigs,
+                set: set[0],
+                errors: errors.array()
+            });
+        }
+        await setMinifigDb.insertNewSetMinifig(setId, minifigId, qty);
+        res.redirect(`/${req.params.themeId}/sets/${req.params.setId}`);
+    })
+]
+
+module.exports = { getThemeSets, getNewSetForm, getSetDetails, getNewSetMinifigForm, postNewSetForm, postNewSetMinifigForm };

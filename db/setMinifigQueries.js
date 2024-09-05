@@ -1,7 +1,7 @@
 const pool = require('./pool');
 
 async function getSetMinifigs(setId) {
-    const { rows } = await pool.query(`SELECT incl.id, incl.minifigId, incl.minifigQty, minifigs.name AS minifigName
+    const { rows } = await pool.query(`SELECT incl.id, incl.minifigQty, minifigs.name AS minifigName
                                        FROM minifig_inclusions AS incl INNER JOIN minifigs
                                        ON incl.minifigId = minifigs.id
                                        WHERE incl.setId = $1`, [setId]);
@@ -19,4 +19,8 @@ async function getNewSetMinifigs(themeId, setId) {
     return rows;
 };
 
-module.exports = { getSetMinifigs, getNewSetMinifigs };
+async function insertNewSetMinifig(setId, minifigId, qty) {
+    await pool.query('INSERT INTO minifig_inclusions (setId, minifigId, minifigQty) VALUES ($1, $2, $3)', [setId, minifigId, qty]);
+}
+
+module.exports = { getSetMinifigs, getNewSetMinifigs, insertNewSetMinifig };

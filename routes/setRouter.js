@@ -11,7 +11,7 @@ router.get('/:setId/addMinifigs', setCtrl.getNewSetMinifigForm);
 router.post('/add', setCtrl.postNewSetForm);
 //router.post('/update', );
 //router.post('/:setId/updateMinifigs', );
-//router.post('/:setId/addMinifigs', );
+router.post('/:setId/addMinifigs', setCtrl.postNewSetMinifigForm);
 //router.post('/delete', );
 
 module.exports = router;

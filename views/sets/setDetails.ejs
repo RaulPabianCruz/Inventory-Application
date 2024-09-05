@@ -15,7 +15,12 @@
         <div>
             <h2>Set Minifigs:</h2>
             <ul>
-
+                <% minifigs.forEach(minifig => { %>
+                    <li>
+                        <h3><%= minifig.minifigname %></h3>
+                        <p>Qty: <%=minifig.minifigqty%></p>
+                    </li>
+                <% }) %>
             </ul>
             <a href="<%=set.id%>/addMinifigs">Add Minifig</a>
         </div>
