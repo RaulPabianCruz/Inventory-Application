@@ -14,7 +14,7 @@ const validateSet = [
     body('pieceCount').trim()
     .isInt({min: 1, max: 99999}).withMessage('Piece Count must be an Integer between 1 and 99,999'),
     body('qty').trim()
-    .isInt({min: 1, max: 10000}).withMessage('Set quantity must be between 1 and 10000')
+    .isInt({min: 1, max: 10000}).withMessage('Set quantity must be an Integer between 1 and 10000')
 ];
 
 const validateMinifig = [
@@ -39,6 +39,14 @@ const getNewSetForm = asyncHandler(async (req, res) => {
     res.render('sets/newSetForm', {
         title: `New ${theme[0].name} Set`,
         themeId: theme[0].id
+    });
+});
+
+const getUpdateSetForm = asyncHandler(async (req, res) => {
+    const set = await db.getSetById(req.params.setId);
+    res.render('sets/updateSetForm', {
+        title: 'Update Set',
+        set: set[0],
     });
 });
 
@@ -83,6 +91,27 @@ const postNewSetForm = [
     })
 ]
 
+const postUpdateSetForm = [
+    validateSet,
+    asyncHandler(async (req, res) => {
+        const name = req.body.name;
+        const pieceCount = req.body.pieceCount;
+        const qty = req.body.qty;
+        
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            const set = await db.getSetById(req.params.setId);
+            return res.status(400).render('/sets/updateSetForm', {
+                title: 'Update Set',
+                set: set[0],
+                errors: errors.array()
+            });
+        }
+        await setDb.updateSet(name, pieceCount, qty, req.params.themeId, req.params.setId);
+        res.redirect(`/${req.params.themeId}/sets/${req.params.setId}`);
+    })
+]
+
 const postNewSetMinifigForm = [
     validateMinifig,
     asyncHandler(async (req, res) => {
@@ -107,4 +136,13 @@ const postNewSetMinifigForm = [
     })
 ]
 
-module.exports = { getThemeSets, getNewSetForm, getSetDetails, getNewSetMinifigForm, postNewSetForm, postNewSetMinifigForm };
+module.exports = { 
+    getThemeSets,
+    getNewSetForm,
+    getUpdateSetForm,
+    getSetDetails,
+    getNewSetMinifigForm,
+    postNewSetForm,
+    postUpdateSetForm,
+    postNewSetMinifigForm
+};
