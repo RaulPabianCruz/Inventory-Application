@@ -27,4 +27,8 @@ async function updateSetMinifig(setId, minifigId, qty) {
     await pool.query('UPDATE minifig_inclusions SET minifigQty = $1 WHERE setId = $2 AND minifigId = $3', [qty, setId, minifigId]);
 }
 
-module.exports = { getSetMinifigs, getNewSetMinifigs, insertNewSetMinifig, updateSetMinifig };
+async function deleteSetMinifig(setId, minifigId) {
+    await pool.query('DELETE FROM minifig_inclusions WHERE setId = $1 AND minifigId = $2', [setId, minifigId]);
+}
+
+module.exports = { getSetMinifigs, getNewSetMinifigs, insertNewSetMinifig, updateSetMinifig, deleteSetMinifig };

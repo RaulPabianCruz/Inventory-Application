@@ -159,9 +159,14 @@ const postUpdateSetMinifigForm = [
             });
         }
         await setMinifigDb.updateSetMinifig(req.params.setId, req.params.minifigId, qty);
-        res.redirect(`/${req.params.themeId}/sets/${req.params.setId}/updateMinifigs`);
+        res.redirect(`/${req.params.themeId}/sets/${req.params.setId}`);
     })
 ]
+
+const postDeleteSetMinifigForm = asyncHandler(async (req, res) => {
+    await setMinifigDb.deleteSetMinifig(req.params.setId, req.params.minifigId);
+    res.redirect(`/${req.params.themeId}/sets/${req.params.setId}`);
+});
 
 module.exports = { 
     getThemeSets,
@@ -173,5 +178,6 @@ module.exports = {
     postNewSetForm,
     postUpdateSetForm,
     postNewSetMinifigForm,
-    postUpdateSetMinifigForm
+    postUpdateSetMinifigForm,
+    postDeleteSetMinifigForm
 };

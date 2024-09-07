@@ -13,6 +13,6 @@ router.post('/:setId/update', setCtrl.postUpdateSetForm);
 //router.post('/:setId/delete', );
 router.post('/:setId/addMinifigs', setCtrl.postNewSetMinifigForm);
 router.post('/:setId/:minifigId/updateMinifigs', setCtrl.postUpdateSetMinifigForm);
-//router.post('/:setId/:minifigId/delete', )
+router.post('/:setId/:minifigId/delete', setCtrl.postDeleteSetMinifigForm)
 
 module.exports = router;
