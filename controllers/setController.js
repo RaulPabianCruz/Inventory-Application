@@ -4,13 +4,10 @@ const db = require('../db/queries');
 const setDb = require('../db/setQueries.js');
 const setMinifigDb = require('../db/setMinifigQueries.js');
 
-const alphaNumErr = 'must consist of letters, numbers, and spaces only.';
-const nameLengthErr = 'must be between 1 and 40 characters.';
-
 const validateSet = [
     body('name').trim()
-    .isAlphanumeric('en-US', {ignore: ' '}).withMessage('Name ' + alphaNumErr)
-    .isLength({min: 1, max: 40}).withMessage('Name ' + nameLengthErr),
+    .isAlphanumeric('en-US', {ignore: ' '}).withMessage('Name must consist of letters, numbers, and spaces only.')
+    .isLength({min: 1, max: 40}).withMessage('Name must be between 1 and 40 characters.'),
     body('pieceCount').trim()
     .isInt({min: 1, max: 99999}).withMessage('Piece Count must be an Integer between 1 and 99,999'),
     body('qty').trim()
@@ -51,13 +48,12 @@ const getUpdateSetForm = asyncHandler(async (req, res) => {
 });
 
 const getSetDetails = asyncHandler(async (req, res) => {
-    const setId = req.params.setId;
-    const set = await db.getSetById(setId);
-    const minifigs = await setMinifigDb.getSetMinifigs(setId);
+    const set = await db.getSetById(req.params.setId);
+    const setMinifigs = await setMinifigDb.getSetMinifigs(req.params.setId);
     res.render('sets/setDetails', {
         title: 'Set Details',
         set: set[0],
-        minifigs: minifigs
+        setMinifigs: setMinifigs
     });
 });
 
@@ -74,19 +70,20 @@ const getNewSetMinifigForm = asyncHandler(async (req, res) => {
 const postNewSetForm = [
     validateSet,
     asyncHandler( async (req, res) => {
-        const theme = await db.getThemeFromId(req.params.themeId);
         const name = req.body.name;
         const pieceCount = req.body.pieceCount;
         const qty = req.body.qty;
+
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
+            const theme = await db.getThemeFromId(req.params.themeId);
             return res.status(400).render('/sets/newSetForm', {
                 title: `New ${theme[0].name} Set`,
                 themeId: theme[0].id,
                 errors: errors.array()
             });
         }
-        await setDb.insertSet(name, pieceCount, qty, theme[0].id);
+        await setDb.insertSet(name, pieceCount, qty, req.params.themeId);
         res.redirect(`/${req.params.themeId}/sets`);
     })
 ]
@@ -119,11 +116,10 @@ const postNewSetMinifigForm = [
         const minifigId = req.body.minifigId;
         const qty = req.body.qty;
 
-        const minifigs = await setMinifigDb.getNewSetMinifigs(req.params.themeId, setId);
-        const set = await db.getSetById(setId);
-
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
+            const minifigs = await setMinifigDb.getNewSetMinifigs(req.params.themeId, setId);
+            const set = await db.getSetById(setId);
             return res.status(400).render('/sets/newSetMinifigForm', {
                 title: `New ${set[0].name} Minifig`,
                 minifigs: minifigs,
