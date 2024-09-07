@@ -87,7 +87,7 @@ const postNewSetForm = [
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
             const theme = await db.getThemeFromId(req.params.themeId);
-            return res.status(400).render('/sets/newSetForm', {
+            return res.status(400).render('sets/newSetForm', {
                 title: `New ${theme[0].name} Set`,
                 themeId: theme[0].id,
                 errors: errors.array()
@@ -108,7 +108,7 @@ const postUpdateSetForm = [
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
             const set = await db.getSetById(req.params.setId);
-            return res.status(400).render('/sets/updateSetForm', {
+            return res.status(400).render('sets/updateSetForm', {
                 title: 'Update Set',
                 set: set[0],
                 errors: errors.array()
@@ -130,7 +130,7 @@ const postNewSetMinifigForm = [
         if(!errors.isEmpty()) {
             const minifigs = await setMinifigDb.getNewSetMinifigs(req.params.themeId, setId);
             const set = await db.getSetById(setId);
-            return res.status(400).render('/sets/newSetMinifigForm', {
+            return res.status(400).render('sets/newSetMinifigForm', {
                 title: `New ${set[0].name} Minifig`,
                 minifigs: minifigs,
                 set: set[0],
@@ -151,7 +151,7 @@ const postUpdateSetMinifigForm = [
         if(!errors.isEmpty()) {
             const set = await db.getSetById(req.params.setId);
             const setMinifigs = await setMinifigDb.getSetMinifigs(req.params.setId);
-            res.status(400).render('/sets/updateSetMinifigForm', {
+            res.status(400).render('sets/updateSetMinifigForm', {
                 title: `Update ${set[0].setname} Minifigs`,
                 set: set[0],
                 setMinifigs: setMinifigs,
@@ -163,9 +163,14 @@ const postUpdateSetMinifigForm = [
     })
 ]
 
-const postDeleteSetMinifigForm = asyncHandler(async (req, res) => {
+const postDeleteSetMinifig = asyncHandler(async (req, res) => {
     await setMinifigDb.deleteSetMinifig(req.params.setId, req.params.minifigId);
     res.redirect(`/${req.params.themeId}/sets/${req.params.setId}`);
+});
+
+const postDeleteSet = asyncHandler(async (req, res) => {
+    await setDb.deleteSet(req.params.setId);
+    res.redirect(`/${req.params.themeId}/sets`);
 });
 
 module.exports = { 
@@ -179,5 +184,6 @@ module.exports = {
     postUpdateSetForm,
     postNewSetMinifigForm,
     postUpdateSetMinifigForm,
-    postDeleteSetMinifigForm
+    postDeleteSetMinifig,
+    postDeleteSet
 };

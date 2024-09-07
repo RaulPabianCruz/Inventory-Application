@@ -10,9 +10,9 @@ router.get('/:setId/addMinifigs', setCtrl.getNewSetMinifigForm);
 router.get('/:setId/updateMinifigs', setCtrl.getUpdateSetMinifigForm);
 router.post('/add', setCtrl.postNewSetForm);
 router.post('/:setId/update', setCtrl.postUpdateSetForm);
-//router.post('/:setId/delete', );
+router.post('/:setId/delete', setCtrl.postDeleteSet);
 router.post('/:setId/addMinifigs', setCtrl.postNewSetMinifigForm);
 router.post('/:setId/:minifigId/updateMinifigs', setCtrl.postUpdateSetMinifigForm);
-router.post('/:setId/:minifigId/delete', setCtrl.postDeleteSetMinifigForm)
+router.post('/:setId/:minifigId/delete', setCtrl.postDeleteSetMinifig)
 
 module.exports = router;
