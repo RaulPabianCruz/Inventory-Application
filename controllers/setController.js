@@ -6,7 +6,7 @@ const setMinifigDb = require('../db/setMinifigQueries.js');
 
 const validateSet = [
     body('name').trim()
-    .isAlphanumeric('en-US', {ignore: ' '}).withMessage('Name must consist of letters, numbers, and spaces only.')
+    .isAlphanumeric('en-US', {ignore: '[\s-]'}).withMessage('Name must consist of letters, numbers, spaces, and hyphens only.')
     .isLength({min: 1, max: 40}).withMessage('Name must be between 1 and 40 characters.'),
     body('pieceCount').trim()
     .isInt({min: 1, max: 99999}).withMessage('Piece Count must be an Integer between 1 and 99,999'),
