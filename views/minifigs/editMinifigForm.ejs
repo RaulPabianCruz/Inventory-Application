@@ -6,17 +6,7 @@
         <h1><%=title%></h1>
         <form action="update" method="post">
             <label for="name">Minifig Name:</label>
-            <input type="text" name="name" id="name" minlength="1" maxlength="25" value="<%=minifig.name%>" required>
-            <label for="theme">Theme:</label>
-            <select name="themeId" id="theme" required>
-                <% themes.forEach(theme => { %>
-                    <% if(theme.id == minifig.themeid) { %>
-                        <option value="<%=theme.id%>" selected><%=theme.name%></option>
-                    <% } else { %>
-                        <option value="<%=theme.id%>"><%=theme.name%></option>
-                    <% } %>
-                <% }); %>
-            </select>
+            <input type="text" name="name" id="name" minlength="1" maxlength="25" value="<%=minifig.name%>" pattern="^[A-Za-z0-9-]*$" required>
             <button type="submit">Update</button>
         </form>
         <a href="/<%=minifig.themeid%>/minifigs/<%=minifig.id%>">Back</a>
