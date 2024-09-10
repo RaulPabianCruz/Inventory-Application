@@ -6,7 +6,7 @@
         <h1><%= title %></h1>
         <form action="/addTheme" method="post">
             <label for="theme">Theme Name:</label>
-            <input type="text" name="theme" id="theme" minlength="1" maxlength="25" required>
+            <input type="text" name="theme" id="theme" minlength="1" maxlength="25" pattern="^[A-Za-z0-9-]*$" required>
             <button type="submit">Submit</button>
         </form>
         <a href="/">Back</a>

@@ -3,9 +3,11 @@ const asyncHandler = require('express-async-handler');
 const db = require('../db/queries.js');
 const themeDb = require('../db/themeQueries.js');
 
-const validateTheme = body('theme').trim()
-                    .isAlphanumeric('en-US', {ignore: ' '}).withMessage('Name can only consist of letters and numbers.')
-                    .isLength({min: 1, max:25}).withMessage('Name must be between 1 and 25 characters.');
+const validateTheme = [
+    body('theme').trim()
+    .isAlphanumeric('en-US', {ignore: '[\s-]'}).withMessage('Name can only consist of letters, numbers, spaces, and hyphens.')
+    .isLength({min: 1, max:25}).withMessage('Name must be between 1 and 25 characters.')
+];
 
 const getAllThemes = asyncHandler( async (req, res) => {
     const themes = await db.getAllThemes();
@@ -19,18 +21,19 @@ const getNewThemeForm = (req, res) => {
     res.render('theme/newThemeForm', { title: 'New Theme' });
 }
 
-const getEditThemeForm = (req, res) => {
+const getEditThemeForm = asyncHandler(async (req, res) => {
+    const theme = await db.getThemeFromId(req.params.themeId);
     res.render('theme/editThemeForm', { 
         title: 'Edit Theme',
-        themeId: req.params.themeId
+        theme: theme[0]
     });
-}
+});
 
 const getThemeProducts = asyncHandler( async (req, res) => {
     const theme = await db.getThemeFromId(req.params.themeId);
     res.render('theme/themeProducts', {
         title: theme[0].name,
-        themeId: req.params.themeId
+        themeId: theme[0].id
     });
 });
 
@@ -54,16 +57,16 @@ const postEditTheme = [
     validateTheme,
     asyncHandler(async (req, res) => {
         const name = req.body.theme;
-        const themeId = req.params.themeId;
         const errors = validationResult(req);
         if(!errors.isEmpty()){
+            const theme = await db.getThemeFromId(req.params.themeId);
             return res.status(400).render('theme/editThemeForm', {
                 title: 'Edit Theme',
-                themeId: req.params.themeId,
+                theme: theme[0],
                 errors: errors.array()
             });
         }
-        await themeDb.updateTheme(name, themeId);
+        await themeDb.updateTheme(name, req.params.themeId);
         res.redirect('/');
     })
 ];
