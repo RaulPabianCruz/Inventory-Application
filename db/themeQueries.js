@@ -9,6 +9,13 @@ async function updateTheme(theme, themeId) {
 }
 
 async function deleteTheme(themeId) {
+    await pool.query(`DELETE FROM minifig_inclusions 
+        WHERE id IN (SELECT incl.id 
+                     FROM minifig_inclusions AS incl
+                     INNER JOIN sets ON incl.setId = sets.id
+                     WHERE sets.themeId = $1 )`, [themeId]);
+    await pool.query('DELETE FROM minifigs WHERE themeId = $1', [themeId]);
+    await pool.query('DELETE FROM sets WHERE themeId = $1', [themeId]);
     await pool.query('DELETE FROM themes WHERE id = $1', [themeId]);
 }
 
