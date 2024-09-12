@@ -4,9 +4,10 @@
     </head>
     <body>
         <h1><%=title%></h1>
+        <%- include('../partials/errors.ejs') %>
         <form action="update" method="post">
             <label for="name">Set Name:</label>
-            <input type="text" id="name" name="name" minlength="1" maxlength="40" pattern="^[A-Za-z0-9-]*$" value="<%=set.setname%>" required>
+            <input type="text" id="name" name="name" minlength="1" maxlength="40" value="<%=set.setname%>" required>
             <label for="pieceCount">Piece Count:</label>
             <input type="text" id="pieceCount" name="pieceCount" pattern="^\d*$" minlength="1" maxlength="5" value="<%=set.piececount%>" required>
             <label for="qty">Qty</label>

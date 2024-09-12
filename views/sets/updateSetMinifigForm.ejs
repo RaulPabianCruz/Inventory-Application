@@ -4,6 +4,7 @@
     </head>
     <body>
         <h1><%=title%></h1>
+        <%- include('../partials/errors.ejs') %>
         <ul>
             <% setMinifigs.forEach(minifig => { %>
                 <li>
