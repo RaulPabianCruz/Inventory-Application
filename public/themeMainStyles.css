@@ -1,0 +1,63 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 75px auto 70px;
+    justify-content: center;
+}
+
+.main.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.themes-list {
+    margin: 0px 100px;
+}
+
+.theme.list-item {
+    list-style: none;
+    background-color: #2bb3ed;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.theme.item {
+    margin-left: 30px;
+    flex: 4 1 0;
+}
+
+.theme.item,
+.theme.edit-lnk {
+    color: white;
+    font-size: 1.8rem;
+}
+
+.theme.options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 0;
+}
+
+.theme.edit-lnk {
+    margin-right: 10px
+}
+
+.theme.delete-form > button {
+    font-size: 1rem;
+}
+
+.theme.add {
+    margin-bottom: 15px;
+}
+
+.theme.add > .text {
+    font-size: 1.8rem;
+    text-align: center;
+}

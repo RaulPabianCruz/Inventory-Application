@@ -1,32 +1,33 @@
 <html>
     <head>
         <title><%= title %></title>
+        <link rel="stylesheet" href="./headerStyles.css">
+        <link rel="stylesheet" href="./themeMainStyles.css">
     </head>
     <body>
-        <h1><%= title %></h1>
-        <ul>
-            <% themes.forEach(theme => { %>
-                <li>
-                    <a href="/<%=theme.id%>/products">
-                        <div>
-                            <h2> <%= theme.name %></h2> 
-                        </div> 
-                    </a>
-                    <a href="/<%=theme.id%>/update">
-                        <div>
-                            Edit
+        <%- include('./partials/header') %>
+        <main>
+            <h1 class="main title"><%= title %></h1>
+            <ul class="themes-list">
+                <% themes.forEach(theme => { %>
+                    <li class="theme list-item">
+                        <a href="/<%=theme.id%>/products" class="theme item">
+                                <h2 class="theme name"> <%= theme.name %></h2> 
+                        </a>
+                        <div class="theme options">
+                            <a href="/<%=theme.id%>/update" class="theme edit-lnk">
+                                    Edit
+                            </a>
+                            <form action="/<%=theme.id%>/delete" method="post" class="theme delete-form">
+                                <button type="submit" onClick="return confirm('Are you sure you want to delete this Theme?');">Delete</button>
+                            </form>
                         </div>
-                    </a>
-                    <form action="/<%=theme.id%>/delete" method="post">
-                        <button type="submit" onClick="return confirm('Are you sure you want to delete this Theme?');">Delete</button>
-                    </form>
-                </li>
-            <% }) %>
-        </ul>
-        <a href="/addTheme">
-            <div>
-                <h3>Add a Theme</h3>
-            </div>
-        </a>
+                    </li>
+                <% }) %>
+            </ul>
+            <a href="/addTheme" class="theme add">
+                    <h3 class="text">Add a Theme</h3>
+            </a>
+        </main>
     </body>
 </html>
