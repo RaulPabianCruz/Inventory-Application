@@ -1,0 +1,40 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 85px;
+    grid-row-gap: 15px;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form.label {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.form.input {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.form.bttn {
+    font-size: 1rem;
+}
+
+.back-lnk {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

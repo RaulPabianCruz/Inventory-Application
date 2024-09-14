@@ -1,15 +1,20 @@
 <html>
     <head>
         <title><%= title %></title>
+        <link rel="stylesheet" href="/headerStyles.css">
+        <link rel="stylesheet" href="/themeFormStyles.css">
     </head>
     <body>
-        <h1><%= title %></h1>
-        <%- include('../partials/errors.ejs') %>
-        <form action="/addTheme" method="post">
-            <label for="theme">Theme Name:</label>
-            <input type="text" name="theme" id="theme" minlength="1" maxlength="25" required>
-            <button type="submit">Submit</button>
-        </form>
-        <a href="/">Back</a>
+        <%- include('../partials/header.ejs') %>
+        <main>
+            <h1 class="title"><%= title %></h1>
+            <%- include('../partials/errors.ejs') %>
+            <form action="/addTheme" method="post" class="form">
+                <label for="theme" class="form label">Theme Name:</label>
+                <input type="text" name="theme" id="theme" minlength="1" maxlength="25" required class="form input">
+                <button type="submit" class="form bttn">Submit</button>
+            </form>
+            <a href="/" class="back-lnk">Back</a>
+        </main>
     </body>
 </html>
