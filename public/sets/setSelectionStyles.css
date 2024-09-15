@@ -1,8 +1,8 @@
-main{
+main {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 75px auto 50px 50px;
-    grid-gap: 10px;
+    grid-gap: 15px;
 }
 
 .title {
@@ -12,41 +12,34 @@ main{
     margin-top: 10px;
 }
 
-.minifigure.list {
+.set.list {
     margin: 0px 100px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
-    grid-auto-rows: 150px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-auto-rows: 200px;
     grid-gap: 25px;
 }
 
-.minifigure.list-item {
+.set.list-item {
     list-style: none;
-    border: 1px solid black;
+    background-color: rgb(255, 78, 78);
+    border: 2px solid black;
     border-radius: 15px;
-    background-color: rgb(52, 161, 52);
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.4);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.minifigure.item {
-    margin-bottom: 10px;
-}
-
-.minifigure.name {
-    font-size: 1.4rem;
+.set.name {
+    font-size: 1.8rem;
     font-weight: bold;
     color: white;
 }
 
-.delete-form > button {
-    font-size: 1rem;
-}
-
 .add-lnk,
 .back-lnk {
+    font-size: 1.2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,9 +47,4 @@ main{
 
 .back-lnk {
     margin-bottom: 10px;
-}
-
-.back-lnk,
-.add-lnk > .text {
-    font-size: 1.2rem;
 }

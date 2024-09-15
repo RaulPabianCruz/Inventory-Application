@@ -30,14 +30,15 @@ main {
 }
 
 .product-opt > .red {
-    background-color: red;
+    background-color: rgb(255, 78, 78);
 }
 
 .product-opt > .green {
-    background-color: green;
+    background-color: rgb(52, 161, 52);
 }
 
 .back-lnk {
+    font-size: 1.2rem;
     display: flex;
     justify-content: center;
     align-items: center;

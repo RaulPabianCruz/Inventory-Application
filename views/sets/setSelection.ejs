@@ -1,23 +1,26 @@
 <html>
     <head>
         <title><%=title%></title>
+        <link rel="stylesheet" href="/headerStyles.css">
+        <link rel="stylesheet" href="/sets/setSelectionStyles.css">
     </head>
     <body>
-        <h1><%=title%></h1>
-        <ul>
-            <% sets.forEach(set => { %>
-                <li>
-                    <a href="sets/<%=set.id%>">
-                        <%=set.setname%>
-                    </a>
-                </li>
-            <% }) %>
-        </ul>
-        <a href="sets/add">
-            <div>
-                <h2>Add Set</h2>
-            </div>
-        </a>
-        <a href="/<%=themeId%>/products">Back</a>
+        <%- include('../partials/header.ejs') %>
+        <main>
+            <h1 class="title"><%=title%></h1>
+            <ul class="set list">
+                <% sets.forEach(set => { %>
+                    <li class="set list-item">
+                        <a href="sets/<%=set.id%>" class="set item">
+                            <h3 class="set name"><%=set.setname%></h3>
+                        </a>
+                    </li>
+                <% }) %>
+            </ul>
+            <a href="sets/add" class="add-lnk">
+                    <h2 class="text">Add Set</h2>
+            </a>
+            <a href="/<%=themeId%>/products" class="back-lnk">Back</a>
+        </main>
     </body>
 </html>
