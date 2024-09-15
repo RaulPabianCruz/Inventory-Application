@@ -1,15 +1,20 @@
 <html>
     <head>
         <title><%=title%></title>
+        <link rel="stylesheet" href="/headerStyles.css">
+        <link rel="stylesheet" href="/themes/themeFormStyles.css">
     </head>
     <body>
-        <h1><%=title%></h1>
-        <%- include('../partials/errors.ejs') %>
-        <form action="add" method="post">
-            <label for="name">Minifig Name:</label>
-            <input type="text" name="name" id="name" minlength="1" maxlength="25" required>
-            <button type="submit">Submit</button>
-        </form>
-        <a href="/<%=themeId%>/minifigs">Back</a>
+        <%- include('../partials/header.ejs') %>
+        <main>
+            <h1 class="title"><%=title%></h1>
+            <%- include('../partials/errors.ejs') %>
+            <form action="add" method="post" class="form">
+                <label for="name" class="form label">Minifig Name:</label>
+                <input type="text" name="name" id="name" minlength="1" maxlength="25" required class="form input">
+                <button type="submit" class="form bttn">Submit</button>
+            </form>
+            <a href="/<%=themeId%>/minifigs" class="back-lnk">Back</a>
+        </main>
     </body>
 </html>
