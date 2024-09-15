@@ -1,28 +1,29 @@
 <html>
     <head>
         <title><%=title%></title>
+        <link rel="stylesheet" href="/headerStyles.css">
+        <link rel="stylesheet" href="/minifigs/minifigSelectionStyles.css">
     </head>
     <body>
-        <h1><%=title%></h1>
-        <ul>
-            <% minifigs.forEach(minifig => { %>
-                <li>
-                    <a href="minifigs/<%=minifig.id%>">
-                        <div>
-                            <h3><%=minifig.name%></h3>
-                        </div>
-                    </a>
-                    <form action="minifigs/<%=minifig.id%>/delete" method="post">
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete this Minifigure?')">Delete</button>
-                    </form>
-                </li>
-            <% }); %>
-        </ul>
-        <a href="minifigs/add">
-            <div>
-                <h2>Add Minifig</h2>
-            </div>
-        </a>
-        <a href="/<%=themeId%>/products">Back</a>
+        <%- include('../partials/header.ejs') %>
+        <main>
+            <h1 class="title"><%=title%></h1>
+            <ul class="minifigure list">
+                <% minifigs.forEach(minifig => { %>
+                    <li class="minifigure list-item">
+                        <a href="minifigs/<%=minifig.id%>" class="minifigure item">
+                                <h3 class="minifigure name"><%=minifig.name%></h3>
+                        </a>
+                        <form action="minifigs/<%=minifig.id%>/delete" method="post" class="delete-form">
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this Minifigure?')">Delete</button>
+                        </form>
+                    </li>
+                <% }); %>
+            </ul>
+            <a href="minifigs/add" class="add-lnk">
+                    <h2 class="text">Add Minifig</h2>
+            </a>
+            <a href="/<%=themeId%>/products" class="back-lnk">Back</a>
+    </main>
     </body>
 </html>
