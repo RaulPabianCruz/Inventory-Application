@@ -1,19 +1,20 @@
 <html>
     <head>
         <title><%=title%></title>
+        <link rel="stylesheet" href="/headerStyles.css">
+        <link rel="stylesheet" href="/themeProductStyles.css">
     </head>
     <body>
-        <h1><%=title%></h1>
-        <a href="/<%=themeId%>/sets">
-            <div>
-                <h2>Sets</h2>
-            </div>
-        </a>
-        <a href="/<%=themeId%>/minifigs">
-            <div>
-                <h2>Minifigures</h2>
-            </div>
-        </a>
-        <a href="/">Back</a>
+        <%- include('../partials/header.ejs') %>
+        <main>
+            <h1 class="title"><%=title%></h1>
+            <a href="/<%=themeId%>/sets" class="product-opt">
+                    <h2 class="text red">Sets</h2>
+            </a>
+            <a href="/<%=themeId%>/minifigs" class="product-opt">
+                    <h2 class="text green">Minifigures</h2>
+            </a>
+            <a href="/" class="back-lnk">Back</a>
+        </main>
     </body>
 </html>
