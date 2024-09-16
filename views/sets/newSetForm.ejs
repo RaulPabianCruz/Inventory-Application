@@ -1,19 +1,26 @@
 <html>
     <head>
         <title><%=title%></title>
+        <link rel="stylesheet" href="/headerStyles.css">
+        <link rel="stylesheet" href="/sets/setFormStyles.css">
     </head>
     <body>
-      <h1><%=title%></h1>
-      <%- include('../partials/errors.ejs') %>
-      <form action="add" method="post">
-        <label for="name">Set Name:</label>
-        <input type="text" name="name" id="name" minlength="1" maxlength="40" required>
-        <label for="pieceCount">Piece Count:</label>
-        <input type="text" name="pieceCount" id="pieceCount" pattern="^\d*$" minlength="1" maxlength="5" required>
-        <label for="qty">Qty:</label>
-        <input type="number" name="qty" id="qty" min="0" max="10000" required>
-        <button type="submit">Add</button>
-      </form>
-      <a href="/<%=themeId%>/sets">Back</a>
+      <%- include('../partials/header.ejs') %>
+      <main>
+        <h1 class="title"><%=title%></h1>
+        <div class="form-section">
+          <%- include('../partials/errors.ejs') %>
+          <form action="add" method="post" class="form">
+            <label for="name" class="form-label">Set Name:</label>
+            <input type="text" name="name" id="name" minlength="1" maxlength="40" required class="form name">
+            <label for="pieceCount" class="form-label">Piece Count:</label>
+            <input type="text" name="pieceCount" id="pieceCount" pattern="^\d*$" minlength="1" maxlength="5" required class="form pc-count">
+            <label for="qty" class="form-label">Qty:</label>
+            <input type="number" name="qty" id="qty" min="0" max="10000" required class="form qty">
+            <button type="submit" class="form-bttn">Add</button>
+          </form>
+        </div>
+        <a href="/<%=themeId%>/sets" class="back-lnk">Back</a>
+      </main>
     </body>
 </html>
