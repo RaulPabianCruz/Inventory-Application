@@ -1,34 +1,47 @@
 <html>
     <head>
         <title><%=title%></title>
+        <link rel="stylesheet" href="/headerStyles.css">
+        <link rel="stylesheet" href="/sets/setDetailsStyles.css">
     </head>
     <body>
-        <h1><%=title%></h1>
-        <div>
-            <h2>Set Name:</h2>
-            <p><%=set.setname%></p>
-            <h2>Piece Count:</h2>
-            <p><%=set.piececount%></p>
-            <h2>Quantity:</h2>
-            <p><%=set.qty%></p>
-        </div>
-        <a href="<%=set.id%>/update">Update</a>
-        <div>
-            <h2>Set Minifigs:</h2>
-            <ul>
-                <% setMinifigs.forEach(minifig => { %>
-                    <li>
-                        <h3><%= minifig.minifigname %></h3>
-                        <p>Qty: <%=minifig.minifigqty%></p>
-                    </li>
-                <% }) %>
-            </ul>
-            <a href="<%=set.id%>/updateMinifigs">Update Minifigs</a>
-            <a href="<%=set.id%>/addMinifigs">Add Minifig</a>
-        </div>
-        <form action="<%=set.id%>/delete" method="post">
-            <button type="submit" onclick="return confirm('Are you sure you want to delete this set?')">Delete</button>
-        </form>
-        <a href="/<%=set.themeid%>/sets">Back</a>
+        <%- include('../partials/header.ejs') %>
+        <main>
+            <h1 class="title"><%=title%></h1>
+            <div class="set info-section">
+                <h2 class="set heading">Set Name:</h2>
+                <p class="set name"><%=set.setname%></p>
+                <h2 class="set heading">Piece Count:</h2>
+                <p class="set pc-count"><%=set.piececount%></p>
+                <h2 class="set heading">Quantity:</h2>
+                <p class="set qty"><%=set.qty%></p>
+                <a href="<%=set.id%>/update" class="set update-lnk">Update</a>
+            </div>
+            <div class="minifig section">
+                <h2 class="minifig heading">Set Minifigs</h2>
+                <div class="minifig grid">
+                    <div class="minifig heading-section">
+                        <h3 class="minifig list-heading">Name:</h3>
+                        <h3 class="minifig list-heading">Qty:</h3>
+                    </div>
+                    <ul class="minifig list">
+                        <% setMinifigs.forEach(minifig => { %>
+                            <li class="minifig list-item">
+                                <h3 class="minifig name"><%= minifig.minifigname %></h3>
+                                <p class="minifig qty"><%=minifig.minifigqty%></p>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+                <div class="minifig options">
+                    <a href="<%=set.id%>/addMinifigs" class="minifig add-lnk">Add Minifig</a>
+                    <a href="<%=set.id%>/updateMinifigs" class="minifig update-lnk">Update Minifigs</a>
+                </div>
+            </div>
+            <form action="<%=set.id%>/delete" method="post" class="delete-form">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this set?')">Delete</button>
+            </form>
+            <a href="/<%=set.themeid%>/sets" class="back-lnk">Back</a>
+        </main>
     </body>
 </html>

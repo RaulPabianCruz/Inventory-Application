@@ -1,0 +1,111 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 75px 300px auto 50px 50px;
+    grid-gap: 10px;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.set.info-section {
+    width: 450px;
+    border: 2px solid black;
+    border-radius: 30px;
+    box-shadow: 5px 5px rgb(0, 0, 0, .4);
+    padding: 10px;
+    margin: 0px auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 5px;
+}
+
+.set.heading,
+.minifig.heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.set.name,
+.set.pc-count,
+.set.qty,
+.set.update-lnk {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.minifig.section {
+    width: 500px;
+    border: 2px solid black;
+    border-radius: 30px;
+    box-shadow: 5px 5px rgb(0, 0, 0, 0.4);
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.minifig.heading-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+}
+
+.minifig.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 5px;
+}
+
+.minifig.list-heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.minifig.list-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+    margin-bottom: 5px;
+}
+
+.minifig.name,
+.minifig.qty {
+    text-align: center;
+}
+
+.minifig.options {
+    margin-top: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.minifig.add-lnk {
+    justify-self: flex-end;
+}
+
+.minifig.update-lnk {
+    justify-self: flex-start;
+}
+
+.delete-form,
+.back-lnk {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-form > button {
+    font-size: 1rem;
+}
+
+.back-lnk {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
