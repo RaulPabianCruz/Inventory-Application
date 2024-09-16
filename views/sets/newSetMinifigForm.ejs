@@ -1,23 +1,30 @@
 <html>
     <head>
         <title><%=title%></title>
+        <link rel="stylesheet" href="/headerStyles.css">
+        <link rel="stylesheet" href="/sets/setMinifigAddFormStyles.css">
     </head>
     <body>
-        <h1><%=title%></h1>
-        <%- include('../partials/errors.ejs') %>
-        <form action="addMinifigs" method="post">
-            <label for="minifigId">Choose a minifig to add:</label>
-            <select name="minifigId" id="minifigId" required>
-                <%minifigs.forEach(minifig => { %>
-                    <option value="<%=minifig.id%>">
-                        <%=minifig.name%>
-                    </option>
-                <% }) %>
-            </select>
-            <label for="qty">Qty:</label>
-            <input type="number" min="1" max="10" name="qty" id="qty" required>
-            <button type="submit">Add</button>
-        </form>
-        <a href="/<%=set.themeid%>/sets/<%=set.id%>">Back</a>
+        <%- include('../partials/header.ejs') %>
+        <main>
+            <h1 class="title"><%=title%></h1>
+            <div class="form-section">
+                <%- include('../partials/errors.ejs') %>
+                <form action="addMinifigs" method="post" class="form">
+                    <label for="minifigId" class="form label">Choose a minifig to add:</label>
+                    <select name="minifigId" id="minifigId" required class="form select">
+                        <%minifigs.forEach(minifig => { %>
+                            <option value="<%=minifig.id%>" class="option">
+                                <%=minifig.name%>
+                            </option>
+                        <% }) %>
+                    </select>
+                    <label for="qty" class="form label">Qty:</label>
+                    <input type="number" min="1" max="10" name="qty" id="qty" required class="form input">
+                    <button type="submit" class="form bttn">Add</button>
+                </form>
+            </div>
+            <a href="/<%=set.themeid%>/sets/<%=set.id%>" class="back-lnk">Back</a>
+        </main>
     </body>
 </html>
