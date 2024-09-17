@@ -22,10 +22,12 @@ main {
 
 .set.list-item {
     list-style: none;
+    text-align: center;
     background-color: rgb(255, 78, 78);
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 5px 5px rgba(0, 0, 0, 0.4);
+    padding: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
