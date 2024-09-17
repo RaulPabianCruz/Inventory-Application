@@ -3,17 +3,18 @@
         <title><%=title%></title>
         <link rel="stylesheet" href="/headerStyles.css">
         <link rel="stylesheet" href="/themes/themeFormStyles.css">
+        <link rel="stylesheet" href="/errorStyles.css">
     </head>
     <body>
         <%- include('../partials/header.ejs') %>
         <main>
             <h1 class="title"><%=title%></h1>
-            <%- include('../partials/errors.ejs') %>
             <form action="add" method="post" class="form">
                 <label for="name" class="form label">Minifig Name:</label>
                 <input type="text" name="name" id="name" minlength="1" maxlength="25" required class="form input">
                 <button type="submit" class="form bttn">Submit</button>
             </form>
+            <%- include('../partials/errors.ejs') %>
             <a href="/<%=themeId%>/minifigs" class="back-lnk">Back</a>
         </main>
     </body>

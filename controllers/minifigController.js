@@ -51,7 +51,7 @@ const postNewMinifig = [
         const name = req.body.name;
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
-            const theme = await db.getThemeFromId(req.params.id);
+            const theme = await db.getThemeFromId(req.params.themeId);
             return res.status(400).render('minifigs/newMinifigForm', {
                 title: `New ${theme[0].name} Minifig`,
                 themeId: theme[0].id,
