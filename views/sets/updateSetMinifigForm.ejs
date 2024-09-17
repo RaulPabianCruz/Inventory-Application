@@ -1,27 +1,35 @@
 <html>
     <head>
         <title><%=title%></title>
+        <link rel="stylesheet" href="/headerStyles.css">
+        <link rel="stylesheet" href="/sets/setMinifigUpdateFormStyles.css">
     </head>
     <body>
-        <h1><%=title%></h1>
-        <%- include('../partials/errors.ejs') %>
-        <ul>
-            <% setMinifigs.forEach(minifig => { %>
-                <li>
-                    <div>
-                        <h3><%=minifig.minifigname%></h3>
-                        <form action="<%=minifig.minifigid%>/updateMinifigs" method="post">
-                            <label for="qty">Qty:</label>
-                            <input type="number" min="1" max="10" id="qty" name="qty" value="<%=minifig.minifigqty%>" required>
-                            <button type="submit">Update</button>
-                        </form>
-                        <form action="<%=minifig.minifigid%>/delete" method="post">
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this minifigure?')">Delete</button>
-                        </form>
-                    </div>
-                </li>
-            <% }); %>
-        </ul>
-        <a href="/<%=set.themeid%>/sets/<%=set.id%>">Back</a>
+        <%- include('../partials/header.ejs') %>
+        <main>
+            <h1 class="title"><%=title%></h1>
+            <div class="minifig section">
+                <%- include('../partials/errors.ejs') %>
+                    <h2 class="minifig heading">Set Minifigures</h2>
+                <ul class="minifig list">
+                    <% setMinifigs.forEach(minifig => { %>
+                        <li class="minifig list-item">
+                                <h3 class="minifig name"><%=minifig.minifigname%></h3>
+                                <form action="<%=minifig.minifigid%>/updateMinifigs" method="post" class="update form">
+                                    <div class="qty section">
+                                        <label for="qty" class="form label">Qty:</label>
+                                        <input type="number" min="1" max="10" id="qty" name="qty" value="<%=minifig.minifigqty%>" required class="form input">
+                                    </div>
+                                    <button type="submit" class="update-bttn">Update</button>
+                                </form>
+                                <form action="<%=minifig.minifigid%>/delete" method="post" class="delete form">
+                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this minifigure?')" class="delete-bttn">Delete</button>
+                                </form>
+                        </li>
+                    <% }); %>
+                </ul>
+            </div>
+            <a href="/<%=set.themeid%>/sets/<%=set.id%>" class="back-lnk">Back</a>
+        </main>
     </body>
 </html>
