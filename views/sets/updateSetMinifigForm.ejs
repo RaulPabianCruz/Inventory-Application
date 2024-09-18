@@ -3,6 +3,7 @@
         <title><%=title%></title>
         <link rel="stylesheet" href="/headerStyles.css">
         <link rel="stylesheet" href="/sets/setMinifigUpdateFormStyles.css">
+        <link rel="stylesheet" href="/errorStyles.css">
     </head>
     <body>
         <%- include('../partials/header.ejs') %>
@@ -14,11 +15,15 @@
                 <ul class="minifig list">
                     <% setMinifigs.forEach(minifig => { %>
                         <li class="minifig list-item">
-                                <h3 class="minifig name"><%=minifig.minifigname%></h3>
-                                <form action="<%=minifig.minifigid%>/updateMinifigs" method="post" class="update form">
+                                <form action="updateMinifigs" method="post" class="update form">
+                                    <div class="name section">
+                                        <label for="name" class="form label">Name:</label>
+                                        <input type="text" id="name" placeholder="<%=minifig.minifigname%>" readonly class="form input">
+                                        <input type="text" name="minifigId" value="<%=minifig.minifigid%>" required hidden>
+                                    </div>
                                     <div class="qty section">
                                         <label for="qty" class="form label">Qty:</label>
-                                        <input type="number" min="1" max="10" id="qty" name="qty" value="<%=minifig.minifigqty%>" required class="form input">
+                                        <input type="number" min="0" max="10" id="qty" name="qty" value="<%=minifig.minifigqty%>" required class="form input">
                                     </div>
                                     <button type="submit" class="update-bttn">Update</button>
                                 </form>

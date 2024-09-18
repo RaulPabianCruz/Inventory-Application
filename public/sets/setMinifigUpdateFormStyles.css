@@ -38,7 +38,7 @@ main{
 .minifig.list-item {
     border-top: 1px solid black;
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-columns: 4fr 1fr;
     align-items: flex-end;
     grid-gap: 5px;
 }
@@ -48,11 +48,13 @@ main{
     align-items: flex-end;
 }
 
-.update.form > .qty.section {
+.update.form > .qty.section,
+.update.form > .name.section {
     display: flex;
     flex-direction: column;
     margin-right: 5px;
 }
+
 
 .qty.section > .form.label {
     text-align: center;

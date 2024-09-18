@@ -131,7 +131,7 @@ const postNewSetMinifigForm = [
             const minifigs = await setMinifigDb.getNewSetMinifigs(req.params.themeId, setId);
             const set = await db.getSetById(setId);
             return res.status(400).render('sets/newSetMinifigForm', {
-                title: `New ${set[0].name} Minifig`,
+                title: `New ${set[0].setname} Minifig`,
                 minifigs: minifigs,
                 set: set[0],
                 errors: errors.array()
@@ -143,22 +143,22 @@ const postNewSetMinifigForm = [
 ]
 
 const postUpdateSetMinifigForm = [
-    body('qty').trim()
-    .isInt({min: 1, max: 10}).withMessage('Minifig quantity must be between 1 and 10'),
+    validateMinifig,
     asyncHandler(async (req, res) => {
+        const minifigId = req.body.minifigId;
         const qty = req.body.qty;
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
             const set = await db.getSetById(req.params.setId);
             const setMinifigs = await setMinifigDb.getSetMinifigs(req.params.setId);
-            res.status(400).render('sets/updateSetMinifigForm', {
+            return res.status(400).render('sets/updateSetMinifigForm', {
                 title: `Update ${set[0].setname} Minifigs`,
                 set: set[0],
                 setMinifigs: setMinifigs,
                 errors: errors.array()
             });
         }
-        await setMinifigDb.updateSetMinifig(req.params.setId, req.params.minifigId, qty);
+        await setMinifigDb.updateSetMinifig(req.params.setId, minifigId, qty);
         res.redirect(`/${req.params.themeId}/sets/${req.params.setId}`);
     })
 ]
