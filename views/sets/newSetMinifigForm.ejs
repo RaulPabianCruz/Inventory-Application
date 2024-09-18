@@ -3,6 +3,7 @@
         <title><%=title%></title>
         <link rel="stylesheet" href="/headerStyles.css">
         <link rel="stylesheet" href="/sets/setMinifigAddFormStyles.css">
+        <link rel="stylesheet" href="/errorStyles.css">
     </head>
     <body>
         <%- include('../partials/header.ejs') %>
@@ -20,7 +21,7 @@
                         <% }) %>
                     </select>
                     <label for="qty" class="form label">Qty:</label>
-                    <input type="number" min="1" max="10" name="qty" id="qty" required class="form input">
+                    <input type="number" min="0" max="10" name="qty" id="qty" required class="form input">
                     <button type="submit" class="form bttn">Add</button>
                 </form>
             </div>
