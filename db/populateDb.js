@@ -182,7 +182,7 @@ async function main() {
         await insertMinifigSetInclusion(client, 'Tri-Wizard Tournament: The Arrival', 'Harry Potter', 1);
         await insertMinifigSetInclusion(client, 'Tri-Wizard Tournament: The Arrival', 'Viktor Krum', 1);
         await insertMinifigSetInclusion(client, 'Tri-Wizard Tournament: The Arrival', 'Fleur Delacour', 1);
-        await insertMinifigSetInclusion(client, 'Tri-Wizard Tournament: The Arrival', 'Cedric Diggory', );
+        await insertMinifigSetInclusion(client, 'Tri-Wizard Tournament: The Arrival', 'Cedric Diggory', 1);
         await insertMinifigSetInclusion(client, 'Gringotts Wizarding Bank', 'Harry Potter', 1);
         await insertMinifigSetInclusion(client, 'Gringotts Wizarding Bank', 'Griphook', 1);
         await insertMinifigSetInclusion(client, 'Gringotts Wizarding Bank', 'Goblin Bank Teller', 2);
